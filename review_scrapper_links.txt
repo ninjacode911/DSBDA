@@ -1,0 +1,4 @@
+link="https://www.amazon.in/Apple-iPhone-14-128GB-Midnight/product-reviews/B0BDHX8Z63/ref=cm_cr_dp_d_show_all_btm?ie=UTF8&reviewerType=a"
+headers={
+    'User-Agent':'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
+}

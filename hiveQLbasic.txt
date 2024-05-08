@@ -1,0 +1,77 @@
+Create Database and use it
+hive>create database test
+hive>use test
+
+CREATE TABLE IN HIVE
+hive> CREATE TABLE emp(eid int,name String,salary String,designation String)
+    ROW FORMAT DELIMITED
+    FIELDS TERMINATED BY ','
+    LINES TERMINATED BY '\n'
+    STORED AS TEXTFILE;
+OK
+Time taken: 0.058 seconds
+
+
+LOAD DATA FROM FILE INTO TABLE
+hive> load data local inpath '/home/cloudera/Documents/sample_emp.txt' overwrite into table emp;
+
+
+Loading data to table default.emp
+Table default.emp stats: [numFiles=1, numRows=0, totalSize=162, rawDataSize=0]
+OK
+Time taken: 0.255 seconds
+
+DISPLAY DATA FROM TABLE
+hive> select * from emp;
+OK
+1201	Gopal	45000	Technical manager
+1202	Manisha	45000	Proof reader
+1203	Masthanvali	40000	Technical writer
+1204	Kiran	40000	Hr Admin
+1205	Kranthi	30000	Op Admin
+NULL	NULL	NULL	NULL
+Time taken: 0.049 seconds, Fetched: 6 row(s)
+
+ALTER TABLE IN HIVE
+hive> ALTER TABLE emp CHANGE name empname String;
+OK
+Time taken: 0.149 seconds
+
+hive> ALTER TABLE emp CHANGE salary salary Double;
+OK
+Time taken: 0.11 seconds
+hive> describe emp ;
+OK
+eid                 	int                 	                    
+empname             	string              	                    
+salary              	double              	                    
+designation         	string              	                    
+Time taken: 0.105 seconds, Fetched: 4 row(s)
+
+hive> alter table emp add columns ( dept string comment'Department Name'); 
+OK
+Time taken: 0.083 seconds
+
+DESCRIBE TABLE IN HIVE
+hive> describe emp;
+OK
+eid                 	int                 	                    
+empname             	string              	                    
+salary              	double              	                    
+designation         	string              	                    
+dept                	string              	Department Name     
+Time taken: 0.056 seconds, Fetched: 5 row(s)
+
+DROP TABLE IN HIVE
+hive> drop table emp ;
+OK
+Time taken: 0.464 seconds
+
+hive> create external table emplist (Id int, Name string , Salary float)
+row format delimited
+ fields terminated by ',' 
+location '/HiveDirectory';
+
+Now, we can use the following command to retrieve the data: -
+
+>select * from emplist;

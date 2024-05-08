@@ -1,0 +1,45 @@
+sudo gedit mapper.py
+
+ls
+cat input.txt
+cat input.txt | python mapper.py
+cat input.txt | python mapper.py |sort | python reducer.py
+
+"""mapper code"""
+#!/usr/bin/python
+
+import sys
+
+for line in sys.stdin:
+    line = line.strip()
+    words = line.split()
+    for word in words:
+        print('%s\t%s' % (word, 1))
+
+
+
+"""reducer code"""
+#!/usr/bin/python
+
+import sys
+prev_word=None
+prev_count=0
+
+for line in sys.stdin:
+	line=line.strip()
+	word,count=line.split('\t')
+
+	count=int(count)
+
+	if prev_word==word:
+	prev_count+=1
+	else:
+		if prev_word:
+		print('%s\t%s' %(prev_word,prev_count))
+		prev_count=count
+		prev_word=word
+
+if prev_word==word:
+print('%s\t%s' %(prev_word,prev_count))
+
+
